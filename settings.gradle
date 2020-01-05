@@ -1,0 +1,2 @@
+include ':app', ':statelayout-lib'
+rootProject.name='StateLayout'
