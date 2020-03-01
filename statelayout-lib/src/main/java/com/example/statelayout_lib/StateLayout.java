@@ -16,6 +16,22 @@ import androidx.annotation.Nullable;
  * <p>
  * 管理不同状态页面的显示与隐藏
  * 内容页面、加载中页面、空数据页面、网络错误页面、未知错误页面
+ *
+ * 设计思路
+ * StateLayout extends FrameLayout
+ *
+ * 1.属性	定义了5种布局类型Key，（内容，记载中，空数据，网络异常，其它异常）
+ * 	        SparseArray<View>
+ * 	        ViewStub
+ * 	        StateLayoutManager（5个布局Id，2个控件Id，一个ReLoad回调）
+ *
+ * 2.初始化	setLayoutManager方法：addView添加View和ViewStub
+ * 	        View：直接添加到SparseArray
+ * 	        ViewStub：延迟到inflate后添加
+ *
+ * 3.显示	显示指定View，其它为Gone
+ * 	        内容，记载中：直接显示
+ * 	        空数据，网络异常，其它异常：ViewStub.inflate并添加至SparseArray，获取控件Id，点击事件设为ReLoad回调
  */
 public class StateLayout extends FrameLayout {
 
